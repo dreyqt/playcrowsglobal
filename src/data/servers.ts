@@ -1,6 +1,3 @@
-import picture1 from "../assets/picture1.png";
-import picture2 from "../assets/picture2.png";
-
 export type ServerStatus = "online" | "coming_soon" | "maintenance";
 export type Accent = "gold" | "purple";
 
@@ -25,7 +22,7 @@ export const DEFAULT_SERVERS: ServerData[] = [
     title: "PLAYCROWS",
     subtitle: "Night Crows",
     description: "Experience a reimagined Night Crows adventure with an active community, enhanced progression, and a world built for long-term gameplay.",
-    image: picture1,
+    image: "/assets/picture1.png",
     status: "online",
     accent: "gold",
     badgeLabel: "MAIN",
@@ -38,7 +35,7 @@ export const DEFAULT_SERVERS: ServerData[] = [
     title: "DDTANK",
     subtitle: "Multiplayer Battle",
     description: "A classic multiplayer battle experience is coming soon. Prepare your team and get ready for the next PLAYCROWS adventure.",
-    image: picture2,
+    image: "/assets/picture2.png",
     status: "coming_soon",
     accent: "purple",
     badgeLabel: "COMING SOON",

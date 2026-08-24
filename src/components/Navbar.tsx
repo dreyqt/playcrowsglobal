@@ -1,5 +1,4 @@
 import { useState, useRef } from "react";
-import logo from "../assets/logo.png";
 import { useServers } from "../hooks/useServers";
 import { IconGrid, IconDiscord, IconNews, IconBook, IconChevronDown, IconUser, IconDownload, IconCrow, IconGamepad, IconMenu, IconX } from "./icons";
 
@@ -22,7 +21,7 @@ export default function Navbar() {
         <div style={{ maxWidth: "1440px", margin: "0 auto", padding: "0 24px", height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center" }}>
             <a href="https://playcrowswebsite.vercel.app" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "9px", textDecoration: "none" }}>
-              <img src={logo} alt="PLAYCROWS logo" style={{ width: "34px", height: "34px", borderRadius: "8px", objectFit: "cover" }} />
+              <img src="/assets/logo.png" alt="PLAYCROWS logo" style={{ width: "34px", height: "34px", borderRadius: "8px", objectFit: "cover" }} />
               <span style={{ fontFamily: "'Cinzel', serif", fontWeight: 700, fontSize: "15px", color: "#F4F1EC", letterSpacing: "0.08em" }}>PLAYCROWS</span>
             </a>
             <div style={{ width: "1px", height: "22px", background: "rgba(255,255,255,0.12)", margin: "0 20px" }} />

@@ -1,11 +1,14 @@
+import { useState } from "react";
 import ServerCard from "./ServerCard";
 import CountdownTimer from "./CountdownTimer";
+import PreRegisterModal from "./PreRegisterModal";
 import { IconPlay } from "./icons";
 import { useServers } from "../hooks/useServers";
-import { STATUS_LABEL } from "../data/servers";
+import { STATUS_LABEL, ServerData } from "../data/servers";
 
 export default function ServerCards() {
   const { servers } = useServers();
+  const [preRegServer, setPreRegServer] = useState<ServerData | null>(null);
 
   return (
     <section id="servers" style={{ background: "#120F0D", padding: "56px 24px 64px" }}>
@@ -19,8 +22,8 @@ export default function ServerCards() {
             <ServerCard
               key={s.id}
               characterImg={s.image}
-              title={s.title}  
-              subtitle={s.subtitle}  
+              title={s.title}
+              subtitle={s.subtitle}
               description={s.description}
               badgeLabel={STATUS_LABEL[s.status]}
               badgeColor={s.accent === "gold" ? "gold" : "purple"}
@@ -29,6 +32,11 @@ export default function ServerCards() {
               featuresHref={s.featuresHref}
               featuresDisabled={s.status !== "online"}
               accent={s.accent}
+              footerAction={
+                s.status === "pre_register"
+                  ? { label: "Pre-Register", onClick: () => setPreRegServer(s) }
+                  : undefined
+              }
               ctaSlot={
                 s.status === "online" ? (
                   <a href={s.playHref || "#"} target="_blank" rel="noopener noreferrer" style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "11px 28px", borderRadius: "8px", background: "#D9A441", color: "#120F0D", fontWeight: 700, fontSize: "13.5px", textDecoration: "none", boxShadow: "0 4px 16px rgba(217,164,65,0.3)" }}>
@@ -39,6 +47,10 @@ export default function ServerCards() {
                     <div style={{ fontSize: "10px", fontWeight: 700, color: "#a78bfa", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "10px", fontFamily: "'Cinzel', serif" }}>Opening in</div>
                     <CountdownTimer targetDate={s.openingAt} />
                   </div>
+                ) : s.status === "pre_register" ? (
+                  <button onClick={() => setPreRegServer(s)} style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "11px 28px", borderRadius: "8px", background: "#a78bfa", color: "#120F0D", fontWeight: 700, fontSize: "13.5px", border: "none", cursor: "pointer", boxShadow: "0 4px 16px rgba(167,139,250,0.3)" }}>
+                    Pre-Register Now
+                  </button>
                 ) : (
                   <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", padding: "11px 28px", borderRadius: "8px", background: "rgba(248,113,113,0.12)", border: "1px solid rgba(248,113,113,0.3)", color: "#f87171", fontWeight: 700, fontSize: "13px" }}>
                     Under Maintenance
@@ -49,6 +61,10 @@ export default function ServerCards() {
           ))}
         </div>
       </div>
+
+      {preRegServer && (
+        <PreRegisterModal server={preRegServer} onClose={() => setPreRegServer(null)} />
+      )}
     </section>
   );
 }

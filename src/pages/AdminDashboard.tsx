@@ -21,6 +21,7 @@ const statusColors: Record<ServerStatus, { bg: string; color: string }> = {
   online: { bg: "rgba(74,222,128,0.12)", color: "#4ade80" },
   coming_soon: { bg: "rgba(251,191,36,0.12)", color: "#fbbf24" },
   maintenance: { bg: "rgba(248,113,113,0.12)", color: "#f87171" },
+  pre_register: { bg: "rgba(167,139,250,0.12)", color: "#a78bfa" },
 };
 
 export default function AdminDashboard() {

@@ -2,6 +2,14 @@ import { useState, useRef } from "react";
 import logo from "../assets/logo.png";
 import { useServers } from "../hooks/useServers";
 import { IconGrid, IconDiscord, IconNews, IconBook, IconChevronDown, IconUser, IconDownload, IconCrow, IconGamepad, IconMenu, IconX } from "./icons";
+import { STATUS_LABEL } from "../data/servers";
+
+const statusStyles: Record<string, { bg: string; color: string; border: string }> = {
+  online:       { bg: "rgba(74,222,128,0.15)",  color: "#4ade80", border: "rgba(74,222,128,0.3)" },
+  coming_soon:  { bg: "rgba(251,191,36,0.15)",  color: "#fbbf24", border: "rgba(251,191,36,0.3)" },
+  maintenance:  { bg: "rgba(248,113,113,0.15)", color: "#f87171", border: "rgba(248,113,113,0.3)" },
+  pre_register: { bg: "rgba(167,139,250,0.15)", color: "#a78bfa", border: "rgba(167,139,250,0.3)" },
+};
 
 export default function Navbar() {
   const { servers } = useServers();
@@ -21,7 +29,13 @@ export default function Navbar() {
       <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: "rgba(18,15,13,0.96)", backdropFilter: "blur(14px)", borderBottom: "1px solid rgba(255,255,255,0.07)", height: "60px" }}>
         <div style={{ maxWidth: "1440px", margin: "0 auto", padding: "0 24px", height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center" }}>
-            <a href="https://playcrowswebsite.vercel.app" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "9px", textDecoration: "none" }}>
+            <a href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              style={{ display: "flex", alignItems: "center", gap: "9px", textDecoration: "none", cursor: "pointer" }}
+            >
               <img src={logo} alt="PLAYCROWS logo" style={{ width: "34px", height: "34px", borderRadius: "8px", objectFit: "cover" }} />
               <span style={{ fontFamily: "'Cinzel', serif", fontWeight: 700, fontSize: "15px", color: "#F4F1EC", letterSpacing: "0.08em" }}>PLAYCROWS</span>
             </a>
@@ -94,8 +108,8 @@ export default function Navbar() {
                 <div style={{ animation: "fadeIn 0.15s ease", paddingBottom: "4px" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
                     <div style={{ fontFamily: "'Cinzel', serif", fontSize: "13px", fontWeight: 700, color: "#F4F1EC" }}>{activeServerData.title}</div>
-                    <span style={{ fontSize: "9px", fontWeight: 700, padding: "4px 8px", borderRadius: "4px", background: activeServerData.status === "online" ? "rgba(74,222,128,0.15)" : activeServerData.status === "coming_soon" ? "rgba(251,191,36,0.15)" : "rgba(248,113,113,0.15)", color: activeServerData.status === "online" ? "#4ade80" : activeServerData.status === "coming_soon" ? "#fbbf24" : "#f87171", border: `1px solid ${activeServerData.status === "online" ? "rgba(74,222,128,0.3)" : activeServerData.status === "coming_soon" ? "rgba(251,191,36,0.3)" : "rgba(248,113,113,0.3)"}`, letterSpacing: "0.05em", textTransform: "uppercase" }}>
-                      {activeServerData.status === "online" ? "LIVE" : activeServerData.status === "coming_soon" ? "COMING SOON" : "MAINTENANCE"}
+                    <span style={{ fontSize: "9px", fontWeight: 700, padding: "4px 8px", borderRadius: "4px", background: statusStyles[activeServerData.status].bg, color: statusStyles[activeServerData.status].color, border: `1px solid ${statusStyles[activeServerData.status].border}`, letterSpacing: "0.05em", textTransform: "uppercase" }}>
+                      {STATUS_LABEL[activeServerData.status]}
                     </span>
                   </div>
                   <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>

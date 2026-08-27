@@ -2,25 +2,27 @@
   import { IconPlay, IconFileText } from "./icons";
 
   type ServerCardProps = {
-    characterImg: string;
-    title: string;
-    subtitle: string;
-    description: string;
-    badgeLabel: string;
-    badgeColor: "gold" | "purple";
-    footerBadgeLabel: string;
-    footerSubtitle: string;
-    featuresHref?: string;
-    featuresDisabled?: boolean;
-    ctaSlot: ReactNode;
-    accent?: "gold" | "purple";
-  }
+  characterImg: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  badgeLabel: string;
+  badgeColor: "gold" | "purple";
+  footerBadgeLabel: string;
+  footerSubtitle: string;
+  featuresHref?: string;
+  featuresDisabled?: boolean;
+  ctaSlot: ReactNode;
+  accent?: "gold" | "purple";
+  footerAction?: { label: string; onClick: () => void };
+}
 
   export default function ServerCard({
-    characterImg, title, subtitle, description,
-    badgeLabel, badgeColor, footerBadgeLabel, footerSubtitle,
-    featuresHref, featuresDisabled, ctaSlot, accent = "gold",
-  }: ServerCardProps) {
+  characterImg, title, subtitle, description,
+  badgeLabel, badgeColor, footerBadgeLabel, footerSubtitle,
+  featuresHref, featuresDisabled, ctaSlot, accent = "gold",
+  footerAction,
+}: ServerCardProps) {
     const isGold = accent === "gold";
     const accentColor = isGold ? "#D9A441" : "#a78bfa";
     const cardBg = isGold ? "#1a1410" : "#1a1535";
@@ -84,7 +86,12 @@
             </div>
             <div style={{ fontSize: "12px", color: "#A9A19A", marginTop: "3px" }}>{footerSubtitle}</div>
           </div>
-          {featuresDisabled ? (
+          {footerAction ? (
+            <button onClick={footerAction.onClick} style={{ display: "flex", alignItems: "center", gap: "7px", padding: "9px 18px", borderRadius: "8px", border: "none", color: "#120F0D", fontSize: "12.5px", fontWeight: 700, background: accentColor, cursor: "pointer", transition: "opacity 0.15s" }}
+              onMouseEnter={e => { e.currentTarget.style.opacity = "0.85"; }}
+              onMouseLeave={e => { e.currentTarget.style.opacity = "1"; }}
+            >{footerAction.label}</button>
+          ) : featuresDisabled ? (
             <button disabled style={{ display: "flex", alignItems: "center", gap: "7px", padding: "8px 16px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.08)", color: "#5a5460", fontSize: "12.5px", fontWeight: 500, background: "transparent", cursor: "not-allowed", opacity: 0.5 }}>
               <IconFileText />Server Features
             </button>

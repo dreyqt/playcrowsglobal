@@ -21,7 +21,7 @@ const statusColors: Record<ServerStatus, { bg: string; color: string }> = {
   online: { bg: "rgba(74,222,128,0.12)", color: "#4ade80" },
   coming_soon: { bg: "rgba(251,191,36,0.12)", color: "#fbbf24" },
   maintenance: { bg: "rgba(248,113,113,0.12)", color: "#f87171" },
-  pre_register: { bg: "rgba(167,139,250,0.12)", color: "#a78bfa" },
+  pre_register: { bg: "rgba(45,212,191,0.12)", color: "#2DD4BF" },
 };
 
 export default function AdminDashboard() {
@@ -99,6 +99,7 @@ export default function AdminDashboard() {
                 <option value="online">Live</option>
                 <option value="coming_soon">Coming Soon</option>
                 <option value="maintenance">Maintenance</option>
+                <option value="pre_register">Pre-Register</option>
               </select>
               <button onClick={() => openEditModal(s)} style={{ padding: "7px 12px", borderRadius: "7px", background: "transparent", border: "1px solid rgba(255,255,255,0.15)", color: "#C8C0B8", fontSize: "12px", cursor: "pointer" }}>
                 Edit
@@ -147,6 +148,7 @@ export default function AdminDashboard() {
                 <option value="online">Live</option>
                 <option value="coming_soon">Coming Soon</option>
                 <option value="maintenance">Maintenance</option>
+                <option value="pre_register">Pre-Register</option>
               </select>
             </div>
             <div>
@@ -154,6 +156,7 @@ export default function AdminDashboard() {
               <select style={inputStyle} value={form.accent} onChange={e => setForm(f => ({ ...f, accent: e.target.value as Accent }))}>
                 <option value="gold">Gold</option>
                 <option value="purple">Purple</option>
+                <option value="teal">Teal</option>
               </select>
             </div>
           </div>
@@ -179,6 +182,11 @@ export default function AdminDashboard() {
           {form.status === "maintenance" && (
             <div style={{ fontSize: "12px", color: "#f87171", marginBottom: "12px" }}>
               This server will show as "Under Maintenance" on the site with no Play/countdown action.
+            </div>
+          )}
+          {form.status === "pre_register" && (
+            <div style={{ fontSize: "12px", color: "#2DD4BF", marginBottom: "12px" }}>
+              This server will show a "Pre-Register" CTA and open the rewards modal. Edit rewards directly in servers.ts for now.
             </div>
           )}
 

@@ -2,9 +2,8 @@ import picture1 from "../assets/picture1.png";
 import picture2 from "../assets/picture2.png";
 import picture3 from "../assets/picture3.png";
 
-
 export type ServerStatus = "online" | "coming_soon" | "maintenance" | "pre_register";
-export type Accent = "gold" | "purple";
+export type Accent = "gold" | "purple" | "teal";
 
 export interface Reward {
   id: string;
@@ -61,7 +60,7 @@ export const DEFAULT_SERVERS: ServerData[] = [
     description: "Boot camp for PLAYCROWS V2 — pre-register now and lock in exclusive launch rewards before the gates open.",
     image: picture3,
     status: "pre_register",
-    accent: "purple",
+    accent: "teal",
     badgeLabel: "PRE-REGISTER",
     footerSubtitle: "MMORPG",
     rewards: [

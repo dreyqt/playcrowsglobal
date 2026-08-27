@@ -95,9 +95,9 @@ export default function Navbar() {
                       }
                     }}
                   >
-                    <div style={{ width: "32px", height: "32px", borderRadius: "6px", background: server.accent === "gold" ? "linear-gradient(135deg,#3a1f00,#8B5E1A)" : "linear-gradient(135deg,#1a1535,#3d2d6e)", display: "flex", alignItems: "center", justifyContent: "center", color: server.accent === "gold" ? "#D9A441" : "#a78bfa", fontSize: "14px" }}>
-                      {server.accent === "gold" ? <IconCrow /> : <IconGamepad />}
-                    </div>
+                   <div style={{ width: "32px", height: "32px", borderRadius: "6px", background: server.accent === "gold" ? "linear-gradient(135deg,#3a1f00,#8B5E1A)" : server.accent === "teal" ? "linear-gradient(135deg,#042f2e,#0d5b54)" : "linear-gradient(135deg,#1a1535,#3d2d6e)", display: "flex", alignItems: "center", justifyContent: "center", color: server.accent === "gold" ? "#D9A441" : server.accent === "teal" ? "#2DD4BF" : "#a78bfa", fontSize: "14px" }}>
+                    {server.accent === "gold" ? <IconCrow /> : <IconGamepad />}
+                  </div>
                     <div style={{ fontSize: "10px", fontWeight: 600, color: "#F4F1EC", textAlign: "center", fontFamily: "'Cinzel', serif" }}>{server.title}</div>
                     <div style={{ fontSize: "9px", color: "#A9A19A" }}>{server.subtitle}</div>
                   </button>

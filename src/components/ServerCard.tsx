@@ -1,5 +1,6 @@
-  import { ReactNode } from "react";
+import { ReactNode } from "react";
   import { IconPlay, IconFileText } from "./icons";
+  import { Accent } from "../data/servers";
 
   type ServerCardProps = {
   characterImg: string;
@@ -7,26 +8,50 @@
   subtitle: string;
   description: string;
   badgeLabel: string;
-  badgeColor: "gold" | "purple";
+  badgeColor: Accent;
   footerBadgeLabel: string;
   footerSubtitle: string;
   featuresHref?: string;
   featuresDisabled?: boolean;
   ctaSlot: ReactNode;
-  accent?: "gold" | "purple";
+  accent?: Accent;
   footerAction?: { label: string; onClick: () => void };
 }
 
+  const ACCENT_STYLES: Record<Accent, { color: string; cardBg: string; border: string; footerBadgeBg: string; footerBadgeColor: string; footerBadgeBorder: string }> = {
+    gold: {
+      color: "#D9A441",
+      cardBg: "#1a1410",
+      border: "rgba(217,164,65,0.18)",
+      footerBadgeBg: "#D9A441",
+      footerBadgeColor: "#120F0D",
+      footerBadgeBorder: "none",
+    },
+    purple: {
+      color: "#a78bfa",
+      cardBg: "#1a1535",
+      border: "rgba(167,139,250,0.18)",
+      footerBadgeBg: "rgba(167,139,250,0.15)",
+      footerBadgeColor: "#a78bfa",
+      footerBadgeBorder: "1px solid rgba(167,139,250,0.3)",
+    },
+    teal: {
+      color: "#2DD4BF",
+      cardBg: "#0f2e2b",
+      border: "rgba(45,212,191,0.18)",
+      footerBadgeBg: "rgba(45,212,191,0.15)",
+      footerBadgeColor: "#2DD4BF",
+      footerBadgeBorder: "1px solid rgba(45,212,191,0.3)",
+    },
+  };
+
   export default function ServerCard({
   characterImg, title, subtitle, description,
-  badgeLabel, badgeColor, footerBadgeLabel, footerSubtitle,
+  badgeLabel, footerBadgeLabel, footerSubtitle,
   featuresHref, featuresDisabled, ctaSlot, accent = "gold",
   footerAction,
 }: ServerCardProps) {
-    const isGold = accent === "gold";
-    const accentColor = isGold ? "#D9A441" : "#a78bfa";
-    const cardBg = isGold ? "#1a1410" : "#1a1535";
-    const borderColor = isGold ? "rgba(217,164,65,0.18)" : "rgba(167,139,250,0.18)";
+    const { color: accentColor, cardBg, border: borderColor, footerBadgeBg, footerBadgeColor, footerBadgeBorder } = ACCENT_STYLES[accent];
 
     return (
       <div>
@@ -37,19 +62,25 @@
             position: "relative",
             borderRadius: "14px",
             overflow: "hidden",
-            height: "270px",
+            minHeight: "290px",
             background: `linear-gradient(160deg, ${cardBg}, #0E0C0A)`,
             border: `1px solid ${borderColor}`,
             zIndex: 1,
           }}>
             {/* Badge */}
-            <div style={{ position: "relative", zIndex: 2, padding: "44px 24px 20px", maxWidth: "58%" }}>{badgeLabel}</div>
+            <div style={{ position: "relative", zIndex: 2, padding: "44px 24px 20px", maxWidth: "62%" }}>{badgeLabel}</div>
 
             {/* Text content — fixed max-width, always clear of the character */}
-            <div style={{ position: "relative", zIndex: 2, padding: "48px 24px 24px", maxWidth: "56%" }}>
-              <div style={{ fontFamily: "'Cinzel', serif", fontWeight: 900, fontSize: "1.6rem", color: "#F4F1EC", lineHeight: 1, marginBottom: "4px" }}>{title}</div>
+            <div style={{ position: "relative", zIndex: 2, padding: "48px 24px 24px", maxWidth: "62%" }}>
+              <div style={{ fontFamily: "'Cinzel', serif", fontWeight: 900, fontSize: "1.6rem", color: "#F4F1EC", lineHeight: 1.1, marginBottom: "6px" }}>{title}</div>
               <div style={{ fontFamily: "'Cinzel', serif", fontSize: "10px", fontWeight: 600, color: accentColor, letterSpacing: "0.18em", marginBottom: "14px", textTransform: "uppercase" }}>{subtitle}</div>
-              <p style={{ color: "#B0A89F", fontSize: "12.5px", lineHeight: 1.55, marginBottom: "12px" }}>{description}</p>
+              <p style={{
+                color: "#B0A89F", fontSize: "12.5px", lineHeight: 1.55, marginBottom: "12px",
+                display: "-webkit-box",
+                WebkitLineClamp: 3,
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
+              }}>{description}</p>
             </div>
           </div>
 
@@ -82,7 +113,7 @@
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
               <span style={{ fontFamily: "'Cinzel', serif", fontSize: "14px", fontWeight: 700, color: "#F4F1EC" }}>{title}</span>
-              <span style={{ fontSize: "10px", fontWeight: 700, padding: "3px 8px", borderRadius: "5px", background: isGold ? "#D9A441" : "rgba(167,139,250,0.15)", color: isGold ? "#120F0D" : "#a78bfa", border: isGold ? "none" : "1px solid rgba(167,139,250,0.3)", letterSpacing: "0.05em" }}>{footerBadgeLabel}</span>
+              <span style={{ fontSize: "10px", fontWeight: 700, padding: "3px 8px", borderRadius: "5px", background: footerBadgeBg, color: footerBadgeColor, border: footerBadgeBorder, letterSpacing: "0.05em" }}>{footerBadgeLabel}</span>
             </div>
             <div style={{ fontSize: "12px", color: "#A9A19A", marginTop: "3px" }}>{footerSubtitle}</div>
           </div>

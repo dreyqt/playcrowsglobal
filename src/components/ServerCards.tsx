@@ -26,7 +26,7 @@ export default function ServerCards() {
               subtitle={s.subtitle}
               description={s.description}
               badgeLabel={STATUS_LABEL[s.status]}
-              badgeColor={s.accent === "gold" ? "gold" : "purple"}
+              badgeColor={s.accent}
               footerBadgeLabel={STATUS_LABEL[s.status]}
               footerSubtitle={s.footerSubtitle}
               featuresHref={s.featuresHref}

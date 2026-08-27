@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import logo from "../assets/logo.png";
 import { useServers } from "../hooks/useServers";
 import { IconGrid, IconDiscord, IconNews, IconBook, IconChevronDown, IconUser, IconDownload, IconCrow, IconGamepad, IconMenu, IconX } from "./icons";
 
@@ -21,7 +22,7 @@ export default function Navbar() {
         <div style={{ maxWidth: "1440px", margin: "0 auto", padding: "0 24px", height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center" }}>
             <a href="https://playcrowswebsite.vercel.app" target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", gap: "9px", textDecoration: "none" }}>
-              <img src="/assets/logo.png" alt="PLAYCROWS logo" style={{ width: "34px", height: "34px", borderRadius: "8px", objectFit: "cover" }} />
+              <img src={logo} alt="PLAYCROWS logo" style={{ width: "34px", height: "34px", borderRadius: "8px", objectFit: "cover" }} />
               <span style={{ fontFamily: "'Cinzel', serif", fontWeight: 700, fontSize: "15px", color: "#F4F1EC", letterSpacing: "0.08em" }}>PLAYCROWS</span>
             </a>
             <div style={{ width: "1px", height: "22px", background: "rgba(255,255,255,0.12)", margin: "0 20px" }} />
@@ -61,57 +62,55 @@ export default function Navbar() {
         </div>
 
         {dropdownOpen && (
-  <div onMouseEnter={onEnterPanel} onMouseLeave={onLeave} style={{ position: "absolute", top: "60px", left: 0, right: 0, background: "rgba(18,15,12,0.6)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.07)", padding: "16px 0", animation: "fadeSlideDown 0.18s ease" }}>
-    <div style={{ maxWidth: "1440px", margin: "0 auto", padding: "0 24px" }}>
-      {/* Horizontal scrollable server tabs */}
-      <div style={{ display: "flex", gap: "12px", overflowX: "auto", paddingBottom: "12px", marginBottom: "12px", borderBottom: "1px solid rgba(255,255,255,0.08)", scrollBehavior: "smooth" }}>
-        {servers.map(server => (
-          <button
-            key={server.id}
-            onMouseEnter={() => setActiveServer(server.id)}
-            style={{
-              display: "flex", flexDirection: "column", alignItems: "center", gap: "6px", padding: "10px 14px", borderRadius: "8px",
-              background: activeServer === server.id ? "rgba(217,164,65,0.1)" : "transparent",
-              border: activeServer === server.id ? "1px solid rgba(217,164,65,0.25)" : "1px solid transparent",
-              cursor: "pointer", whiteSpace: "nowrap", transition: "all 0.15s", flexShrink: 0,
-            }}
-            onMouseLeave={e => { 
-              if (activeServer !== server.id) {
-                e.currentTarget.style.background = "transparent";
-              }
-            }}
-          >
-            <div style={{ width: "32px", height: "32px", borderRadius: "6px", background: server.accent === "gold" ? "linear-gradient(135deg,#3a1f00,#8B5E1A)" : "linear-gradient(135deg,#1a1535,#3d2d6e)", display: "flex", alignItems: "center", justifyContent: "center", color: server.accent === "gold" ? "#D9A441" : "#a78bfa", fontSize: "14px" }}>
-              {server.accent === "gold" ? <IconCrow /> : <IconGamepad />}
-            </div>
-            <div style={{ fontSize: "10px", fontWeight: 600, color: "#F4F1EC", textAlign: "center", fontFamily: "'Cinzel', serif" }}>{server.title}</div>
-            <div style={{ fontSize: "9px", color: "#A9A19A" }}>{server.subtitle}</div>
-          </button>
-        ))}
-      </div>
+          <div onMouseEnter={onEnterPanel} onMouseLeave={onLeave} style={{ position: "absolute", top: "60px", left: 0, right: 0, background: "rgba(18,15,12,0.6)", backdropFilter: "blur(20px)", borderBottom: "1px solid rgba(255,255,255,0.07)", padding: "16px 0", animation: "fadeSlideDown 0.18s ease" }}>
+            <div style={{ maxWidth: "1440px", margin: "0 auto", padding: "0 24px" }}>
+              <div style={{ display: "flex", gap: "12px", overflowX: "auto", paddingBottom: "12px", marginBottom: "12px", borderBottom: "1px solid rgba(255,255,255,0.08)", scrollBehavior: "smooth" }}>
+                {servers.map(server => (
+                  <button
+                    key={server.id}
+                    onMouseEnter={() => setActiveServer(server.id)}
+                    style={{
+                      display: "flex", flexDirection: "column", alignItems: "center", gap: "6px", padding: "10px 14px", borderRadius: "8px",
+                      background: activeServer === server.id ? "rgba(217,164,65,0.1)" : "transparent",
+                      border: activeServer === server.id ? "1px solid rgba(217,164,65,0.25)" : "1px solid transparent",
+                      cursor: "pointer", whiteSpace: "nowrap", transition: "all 0.15s", flexShrink: 0,
+                    }}
+                    onMouseLeave={e => { 
+                      if (activeServer !== server.id) {
+                        e.currentTarget.style.background = "transparent";
+                      }
+                    }}
+                  >
+                    <div style={{ width: "32px", height: "32px", borderRadius: "6px", background: server.accent === "gold" ? "linear-gradient(135deg,#3a1f00,#8B5E1A)" : "linear-gradient(135deg,#1a1535,#3d2d6e)", display: "flex", alignItems: "center", justifyContent: "center", color: server.accent === "gold" ? "#D9A441" : "#a78bfa", fontSize: "14px" }}>
+                      {server.accent === "gold" ? <IconCrow /> : <IconGamepad />}
+                    </div>
+                    <div style={{ fontSize: "10px", fontWeight: 600, color: "#F4F1EC", textAlign: "center", fontFamily: "'Cinzel', serif" }}>{server.title}</div>
+                    <div style={{ fontSize: "9px", color: "#A9A19A" }}>{server.subtitle}</div>
+                  </button>
+                ))}
+              </div>
 
-      {/* Details panel - changes on hover */}
-      {activeServerData ? (
-        <div style={{ animation: "fadeIn 0.15s ease", paddingBottom: "4px" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
-            <div style={{ fontFamily: "'Cinzel', serif", fontSize: "13px", fontWeight: 700, color: "#F4F1EC" }}>{activeServerData.title}</div>
-            <span style={{ fontSize: "9px", fontWeight: 700, padding: "4px 8px", borderRadius: "4px", background: activeServerData.status === "online" ? "rgba(74,222,128,0.15)" : activeServerData.status === "coming_soon" ? "rgba(251,191,36,0.15)" : "rgba(248,113,113,0.15)", color: activeServerData.status === "online" ? "#4ade80" : activeServerData.status === "coming_soon" ? "#fbbf24" : "#f87171", border: `1px solid ${activeServerData.status === "online" ? "rgba(74,222,128,0.3)" : activeServerData.status === "coming_soon" ? "rgba(251,191,36,0.3)" : "rgba(248,113,113,0.3)"}`, letterSpacing: "0.05em", textTransform: "uppercase" }}>
-              {activeServerData.status === "online" ? "LIVE" : activeServerData.status === "coming_soon" ? "COMING SOON" : "MAINTENANCE"}
-            </span>
+              {activeServerData ? (
+                <div style={{ animation: "fadeIn 0.15s ease", paddingBottom: "4px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
+                    <div style={{ fontFamily: "'Cinzel', serif", fontSize: "13px", fontWeight: 700, color: "#F4F1EC" }}>{activeServerData.title}</div>
+                    <span style={{ fontSize: "9px", fontWeight: 700, padding: "4px 8px", borderRadius: "4px", background: activeServerData.status === "online" ? "rgba(74,222,128,0.15)" : activeServerData.status === "coming_soon" ? "rgba(251,191,36,0.15)" : "rgba(248,113,113,0.15)", color: activeServerData.status === "online" ? "#4ade80" : activeServerData.status === "coming_soon" ? "#fbbf24" : "#f87171", border: `1px solid ${activeServerData.status === "online" ? "rgba(74,222,128,0.3)" : activeServerData.status === "coming_soon" ? "rgba(251,191,36,0.3)" : "rgba(248,113,113,0.3)"}`, letterSpacing: "0.05em", textTransform: "uppercase" }}>
+                      {activeServerData.status === "online" ? "LIVE" : activeServerData.status === "coming_soon" ? "COMING SOON" : "MAINTENANCE"}
+                    </span>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
+                    {[{ label: "Overview", desc: "Learn about the server" }, { label: "Server Features", desc: "Rates, events, and mechanics" }].map(item => (
+                      <a key={item.label} href={activeServerData.featuresHref || "https://playcrowswebsite.vercel.app"} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 0", borderRadius: "0", background: "transparent", border: "none", textDecoration: "none", transition: "all 0.15s" }}>
+                        <div><div style={{ fontSize: "12.5px", fontWeight: 600, color: "#F4F1EC" }}>{item.label}</div><div style={{ fontSize: "11px", color: "#A9A19A", marginTop: "2px" }}>{item.desc}</div></div>
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#A9A19A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+            </div>
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-            {[{ label: "Overview", desc: "Learn about the server" }, { label: "Server Features", desc: "Rates, events, and mechanics" }].map(item => (
-              <a key={item.label} href={activeServerData.featuresHref || "https://playcrowswebsite.vercel.app"} target="_blank" rel="noopener noreferrer" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 0", borderRadius: "0", background: "transparent", border: "none", textDecoration: "none", transition: "all 0.15s" }}>
-                <div><div style={{ fontSize: "12.5px", fontWeight: 600, color: "#F4F1EC" }}>{item.label}</div><div style={{ fontSize: "11px", color: "#A9A19A", marginTop: "2px" }}>{item.desc}</div></div>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#A9A19A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-              </a>
-            ))}
-          </div>
-        </div>
-      ) : null}
-    </div>
-  </div>
-)}
+        )}
       </nav>
 
       {mobileOpen && (

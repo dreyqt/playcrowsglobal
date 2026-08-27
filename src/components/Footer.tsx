@@ -1,3 +1,4 @@
+import logo from "../assets/logo.png";
 import { IconDiscord, IconFacebook } from "./icons";
 
 export default function Footer() {
@@ -7,8 +8,8 @@ export default function Footer() {
         <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: "48px", marginBottom: "48px" }} className="footer-grid">
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
-            <img src="/assets/logo.png" alt="PLAYCROWS logo" style={{ width: "34px", height: "34px", borderRadius: "8px", objectFit: "cover" }} />
-            <span style={{ fontFamily: "'Cinzel', serif", fontWeight: 700, fontSize: "15px", color: "#F4F1EC", letterSpacing: "0.08em" }}>PLAYCROWS</span>
+              <img src={logo} alt="PLAYCROWS logo" style={{ width: "34px", height: "34px", borderRadius: "8px", objectFit: "cover" }} />
+              <span style={{ fontFamily: "'Cinzel', serif", fontWeight: 700, fontSize: "15px", color: "#F4F1EC", letterSpacing: "0.08em" }}>PLAYCROWS</span>
             </div>
             <p style={{ color: "#5a5450", fontSize: "13px", lineHeight: 1.7, margin: "0 0 22px", maxWidth: "240px" }}>The home of your next adventure. A premium private gaming network built for the community.</p>
             <div style={{ display: "flex", gap: "10px" }}>

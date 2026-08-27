@@ -111,7 +111,7 @@ export default function AdminDashboard() {
             <div style={{ color: "#5a5450", fontSize: "13px", textAlign: "center", padding: "30px" }}>No servers yet — click "Add server" to create one.</div>
           )}
           <button onClick={() => confirm("Reset all servers to defaults?") && resetToDefaults()} style={{ marginTop: "20px", padding: "8px 16px", borderRadius: "8px", background: "transparent", border: "1px solid rgba(255,255,255,0.1)", color: "#6b6460", fontSize: "12px", cursor: "pointer" }}>
-          Reset to defaults
+          Reset to default
         </button>
         </div>
       </div>

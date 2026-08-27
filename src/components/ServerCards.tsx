@@ -19,8 +19,8 @@ export default function ServerCards() {
             <ServerCard
               key={s.id}
               characterImg={s.image}
-              title={s.title}
-              subtitle={s.subtitle}
+              title={s.title}  
+              subtitle={s.subtitle}  
               description={s.description}
               badgeLabel={STATUS_LABEL[s.status]}
               badgeColor={s.accent === "gold" ? "gold" : "purple"}

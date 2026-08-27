@@ -24,7 +24,7 @@ export const DEFAULT_SERVERS: ServerData[] = [
     title: "PLAYCROWS",
     subtitle: "Night Crows",
     description: "Experience a reimagined Night Crows adventure with an active community, enhanced progression, and a world built for long-term gameplay.",
-    image: picture1,  // ← use the import
+    image: picture1,  // ← use the import 
     status: "online",
     accent: "gold",
     badgeLabel: "MAIN",
